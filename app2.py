@@ -11,12 +11,7 @@ with st.sidebar:
     replicate_api = "r8_2kkTh4tEB2ynAx4rm9r72NnC90VpoTt4PGU2v"
     os.environ['REPLICATE_API_TOKEN'] = replicate_api
     '''This is an Experimental Unrefined Chatbot. Made by Samuel A. Melendez. In collaboration with Carlos Sotelo and David Sotelo. The Chatbot uses the Llama 2 model by Meta and the Streamlit UI.'''
-    st.subheader('Model')
-    selected_model = st.sidebar.selectbox('Choose a Llama2 model', ['Llama2-7B', 'Llama2-13B'], key='selected_model')
-    if selected_model == 'Llama2-7B':
-        llm = 'a16z-infra/llama7b-v2-chat:4f0a4744c7295c024a1de15e1a63c880d3da035fa1f49bfd344fe076074c8eea'
-    elif selected_model == 'Llama2-13B':
-        llm = 'a16z-infra/llama13b-v2-chat:df7690f1994d94e96ad9d568eac121aecf50684a0b0963b25a41cc40061269e5'
+    llm = 'a16z-infra/llama13b-v2-chat:df7690f1994d94e96ad9d568eac121aecf50684a0b0963b25a41cc40061269e5'
     temperature = 0.9
     top_p = 0.6
 
