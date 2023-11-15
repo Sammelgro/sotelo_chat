@@ -7,10 +7,10 @@ st.set_page_config(page_title="🤖Control Chat")
 
 # Replicate Credentials
 with st.sidebar:
-    st.title('🤖 Control Chat (v2.0.R)')
+    st.title('🤖 Control Chat (v2.0.R.E)')
     replicate_api = "r8_2kkTh4tEB2ynAx4rm9r72NnC90VpoTt4PGU2v"
     os.environ['REPLICATE_API_TOKEN'] = replicate_api
-    '''This is an Experimental Unrefined Chatbot. Made by Samuel A. Melendez. In collaboration with Carlos Sotelo and David Sotelo. The Chatbot uses the Llama 2 model by Meta and the Streamlit UI.'''
+    '''This is an Experimental Chatbot. Made by Samuel A. Melendez. In collaboration with Dr. Carlos Sotelo and Dr. David Sotelo. The Chatbot uses the Llama 2 model by Meta and the Streamlit UI.'''
     llm = 'a16z-infra/llama13b-v2-chat:df7690f1994d94e96ad9d568eac121aecf50684a0b0963b25a41cc40061269e5'
     temperature = 0.9
     top_p = 0.6
