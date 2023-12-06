@@ -2,6 +2,7 @@ import json
 import streamlit as st
 import replicate
 import os
+import streamlit_lottie
 from streamlit_lottie import st_lottie
 from streamlit_lottie import st_lottie_spinner
 
