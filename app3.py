@@ -1,19 +1,28 @@
+import json
 import streamlit as st
 import replicate
 import os
+from streamlit_lottie import st_lottie
+from streamlit_lottie import st_lottie_spinner
 
 # App title
 st.set_page_config(page_title="🤖Control Chat")
 
-# Replicate Credentials
+#Model
+replicate_api = "r8_2kkTh4tEB2ynAx4rm9r72NnC90VpoTt4PGU2v"
+os.environ['REPLICATE_API_TOKEN'] = replicate_api
+llm = 'meta/llama-2-70b-chat:02e509c789964a7ea8736978a43525956ef40397be9033abf9fd2badfe68c9e3'
+temperature = 0.9
+top_p = 0.6
+
+#Lottie
+lottie_url = "https://lottie.host/ed9f7d11-d2f6-44c5-bf79-80645fcd179f/guP07rzLPB.json"
+
+# Sidebar
 with st.sidebar:
     st.title('🤖 Control Chat (v2.0.R.S)')
-    replicate_api = "r8_2kkTh4tEB2ynAx4rm9r72NnC90VpoTt4PGU2v"
-    os.environ['REPLICATE_API_TOKEN'] = replicate_api
     '''Esto es un Chatbot Experimental. Creado por Samuel A. Meléndez. En colaboración con Dr. Carlos Sotelo y Dr. David Sotelo. El Chatbot utiliza el modelo Llama 2 de Meta y la interfaz de usuario Streamlit.'''
-    llm = 'a16z-infra/llama13b-v2-chat:df7690f1994d94e96ad9d568eac121aecf50684a0b0963b25a41cc40061269e5'
-    temperature = 0.9
-    top_p = 0.6
+    st_lottie(lottie_url, key="user")
 
 # Store LLM generated responses
 if "messages" not in st.session_state.keys():

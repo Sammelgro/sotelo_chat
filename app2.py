@@ -1,19 +1,30 @@
+import json
 import streamlit as st
 import replicate
 import os
+from streamlit_lottie import st_lottie
+from streamlit_lottie import st_lottie_spinner
 
 # App title
 st.set_page_config(page_title="🤖Control Chat")
 
-# Replicate Credentials
+#Lottie
+lottie_url = "https://lottie.host/ed9f7d11-d2f6-44c5-bf79-80645fcd179f/guP07rzLPB.json"
+
+#Model
+llm = 'meta/llama-2-70b-chat:02e509c789964a7ea8736978a43525956ef40397be9033abf9fd2badfe68c9e3'
+temperature = 0.9
+top_p = 0.6
+
+#Replicate ID
+replicate_api = "r8_2kkTh4tEB2ynAx4rm9r72NnC90VpoTt4PGU2v"
+os.environ['REPLICATE_API_TOKEN'] = replicate_api
+
+# Sidebar
 with st.sidebar:
     st.title('🤖 Control Chat (v2.0.R.E)')
-    replicate_api = "r8_2kkTh4tEB2ynAx4rm9r72NnC90VpoTt4PGU2v"
-    os.environ['REPLICATE_API_TOKEN'] = replicate_api
     '''This is an Experimental Chatbot. Made by Samuel A. Melendez. In collaboration with Dr. Carlos Sotelo and Dr. David Sotelo. The Chatbot uses the Llama 2 model by Meta and the Streamlit UI.'''
-    llm = 'a16z-infra/llama13b-v2-chat:df7690f1994d94e96ad9d568eac121aecf50684a0b0963b25a41cc40061269e5'
-    temperature = 0.9
-    top_p = 0.6
+    st_lottie(lottie_url, key="user")
 
 # Store LLM generated responses
 if "messages" not in st.session_state.keys():
@@ -24,6 +35,7 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.write(message["content"])
 
+#Chat History
 def clear_chat_history():
     st.session_state.messages = [{"role": "assistant", "content": "How may I assist you today?"}]
 st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
@@ -36,7 +48,7 @@ def generate_llama2_response(prompt_input):
             string_dialogue += "User: " + dict_message["content"] + "\n\n"
         else:
             string_dialogue += "Assistant: " + dict_message["content"] + "\n\n"
-    output = replicate.run('a16z-infra/llama13b-v2-chat:df7690f1994d94e96ad9d568eac121aecf50684a0b0963b25a41cc40061269e5', 
+    output = replicate.run('meta/llama-2-70b-chat:02e509c789964a7ea8736978a43525956ef40397be9033abf9fd2badfe68c9e3', 
                            input={"prompt": f"{string_dialogue} {prompt_input} Assistant: ",
                                   "temperature":temperature, "top_p":top_p, "repetition_penalty":1})
     return output
